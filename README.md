@@ -32,7 +32,7 @@ Tujuan dari proyek ini adalah:
 #### Solution Statements
 Untuk mendapatkan model *machine learning* dengan akurasi terbaik, saya akan membuat 2 model berbeda untuk dibandingkan, di antaranya:
 - *Random Forest*, adalah sebuah algoritma dalam model *machine learning* yang bekerja dengan membangun beberapa decision tree dan menggabungkannya demi mendapatkan prediksi yang lebih stabil dan akurat. 
-- *KKN*, adalah sebuah algoritma dalam model *machine learning* yang mengasumsikan bahwa sesuatu yang mirip akan ada dalam jarak yang berdekatan atau bertetangga, sehingga data-data yang cenderung serupa akan dekat satu sama lain. 
+- *KNN*, adalah sebuah algoritma dalam model *machine learning* yang mengasumsikan bahwa sesuatu yang mirip akan ada dalam jarak yang berdekatan atau bertetangga, sehingga data-data yang cenderung serupa akan dekat satu sama lain. 
 
 ## Data Understanding
 
@@ -63,13 +63,49 @@ Berikut adalah tahapan yang diperlukan untuk memahami dataset sebelum dilakukan 
 - mengecek apakah ada data yang terduplikat.
 - mengecek apakah data sudah seimbang atau belum.
 
+
 Berikut adalah tahapan dalam visualisasi data untuk memahami data sebelum dilakukan *pre-processing*
 - *Univariate Analysis*, dilakukan untuk melihat distribusi data setiap variabel. 
-    - distribusi data gender dapat dilihat pada Gambar 1
-    - distribusi data ever_married dapat dilihat pada Gambar 2
-    - distribusi data work_type dapat dilihat pada Gambar 3
-    - distribusi data Residence_type dapat dilihat pada Gambar 4
-    - distribusi data id, age, hypertension, heart_disease, avg_glucose_level, bmi, stroke dapat dilihat pada Gambar 5
+    - distribusi data gender
+        
+        ![gender](https://user-images.githubusercontent.com/99728385/192228395-94488f75-ad66-4dd3-9bc7-c849a1785627.PNG)
+
+    - distribusi data ever_married
+    
+        ![ever_married](https://user-images.githubusercontent.com/99728385/192228873-6ac96941-848e-4544-8f07-fd2e26aaa974.PNG)
+        
+    - distribusi data work_type
+    
+        ![work_type](https://user-images.githubusercontent.com/99728385/192228947-00cb30ee-ec1c-4b8e-a031-1b4a4558f43a.PNG)
+        
+    - distribusi data Residence_type
+    
+        ![Recidence_type](https://user-images.githubusercontent.com/99728385/192229011-2697297f-3c49-49ba-bbe4-dde553e3ba2f.PNG)
+    
+    - distribusi data age
+
+        ![age](https://user-images.githubusercontent.com/99728385/192229104-5c0bfec6-e730-43ce-9504-2f37dd0cd1a2.PNG)
+
+    - distribusi data hypertension
+    
+        ![hypertension](https://user-images.githubusercontent.com/99728385/192229171-55a7e775-7edf-4b88-b5f2-da61fb2bf190.PNG)
+
+    - distribusi data heart_disease
+
+        ![heart_disease](https://user-images.githubusercontent.com/99728385/192229285-028a40af-444b-41f8-bd9d-d1f3f9c145e8.PNG)
+
+    - distribusi data avg_glucose_level
+
+        ![avg_glucose_level](https://user-images.githubusercontent.com/99728385/192229508-d4d5b4f3-c2cd-480d-8a52-fbe662c43dd2.PNG)
+
+    - distribusi data bmi
+    
+        ![bmi](https://user-images.githubusercontent.com/99728385/192229586-3719d809-1a31-40ce-827f-09cb2d40bb99.PNG)
+
+    - distribusi data stroke
+    
+        ![stroke](https://user-images.githubusercontent.com/99728385/192229667-49a6f35d-b307-41e2-97de-99fc211c42aa.PNG)
+
 
 ## Data Preparation
 
@@ -78,20 +114,26 @@ Berikut adalah tahapan yang dilakukan dalam proses data *preparation*:
 - menghapus kategori yang tidak diperlukan. kategori yang dihapus adalah unknown pada kolom smoking_status dan other pada kolom gender.
 - penanganan data yang hilang atau *missing values*. dalam dataset ini, ada sebanyak 201 data kosong pada kolom bmi. maka diterapkan teknik melakukan imputasi atau nilai pengganti. nilai pengganti yang digunakan adalah nilai rata-rata *(mean)*.
 - melakukan *upsample* agar data seimbang. dalam dataset ini, ditemukan bahwa data belum seimbang, maka dilakukan upsample agar data menjadi seimbang dan menghasilkan prediksi yang bagus.
-- mendeteksi *outliers*. dalam proyek ini saya menggunakan visualisasi *boxplots* untuk mendeteksi *outliers*.
+- mendeteksi *outliers*. dalam proyek ini saya menggunakan InterQuartile Range untuk mendeteksi outliers.
 - melakukan *one hot encoding*. ini dilakukan pada data kategorikal agar datanya berubah menjadi data numerikal.
 - melakukan *feature detection*. teknik ini dilakukan untuk melihat fitur apa saja yang memiliki peranan penting untuk membuat model. dari sini ditemukan bahwa fitur Age, Average Glucose Level, dan BMI memiliki peranan yang sangat penting untuk digunakan dalam membuat model.
 - membagi dataset, dan melakukan scaling dengan *MinMaxScaler*. teknik ini dilakukan untuk membuat numerical data pada dataset memiliki rentang nilai (scale) yang sama. 
 
 ## Modeling
 
-Setelah melakukan data *preparation*, langkah selanjutnya yang dilakukan adalah membuat model *machine learning*. Pada proyek ini akan dibuat 2 model yaitu *Random Forest* dan *KKN*.
+Setelah melakukan data *preparation*, langkah selanjutnya yang dilakukan adalah membuat model *machine learning*. Pada proyek ini akan dibuat 2 model yaitu *Random Forest* dan *KNN*.
 
-- *Random Forest*, dalam mengimplementasikan algoritma ini, saya menggunakan method *RandomForestClassifier* dari sklearn.ensemble dengan argumen n_estimators=30 dan max_features=3. dan dihasilkan akurasi test score sebesar 0,97.
+- *Random Forest*, dalam mengimplementasikan algoritma ini, saya menggunakan method *RandomForestClassifier* dari sklearn.ensemble dengan argumen n_estimators=30 dan max_features=3. dan dihasilkan akurasi test score sebesar 0,97 dan confusion matrix score sebesar 0,98. 
+
+    ![note1](https://user-images.githubusercontent.com/99728385/192223120-4bf4b5f4-df8d-485e-b76b-6c583b1d3965.PNG)
+
   
   Kelebihan dari algoritma yang ini adalah dapat memperkiraan variabel apa yang penting dalam klasifikasi, sedangkan kekurangan dari algoritma ini yaitu memiliki kompleksitas yang tinggi.
 
-- *KKN*, dalam mengimplementasikan algoritma ini, saya menggunakan method *KNeighborsClassifier* dari sklearn.neighbors dengan argumen n_neighbors=2. dan dihasilkan akurasi  test score sebesar 0,94.
+- *KNN*, dalam mengimplementasikan algoritma ini, saya menggunakan method *KNeighborsClassifier* dari sklearn.neighbors dengan argumen n_neighbors=2. dan dihasilkan akurasi test score sebesar 0,94 dan confusion matrix score sebesar 0,97.
+
+    ![note2](https://user-images.githubusercontent.com/99728385/192223188-ca6f93f2-cd73-4603-84e2-f28edef1bd85.PNG)
+
   
   Kelebihan dari algoritma yang ini adalah cukup efektif terhadap data yang besar, sedangkan kekurangan dari algoritma ini yaitu perlu menentukan nilai parameter K terlebih dahulu.
 
@@ -101,7 +143,7 @@ Didapatkan metriks akurasi sebagai berikut, agar lebih mudah dimengerti maka dap
 
 ![perbandingan_akurasi](https://user-images.githubusercontent.com/99728385/192131658-473cfe7b-4cd5-4bfb-aafc-650774809218.PNG)
 
-Dari diagram di atas dapat diketahui bahwa model dengan *Random Forest* memiliki akurasi yang lebih tinggi dibanding *KNeighbors*, dengan akurasi yang dimiliki adalah sebesar 97%.
+Dari diagram di atas dapat diketahui bahwa model dengan *Random Forest* memiliki akurasi yang lebih tinggi dibanding *KNeighbors*.
 
 ## Kesimpulan
 - Variabel atau fitur pada dataset yang berpengaruh dan memiliki peranan penting untuk membuat model *machine learning* adalah variabel Age, Average Glucose Level, dan BMI.
