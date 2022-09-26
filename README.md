@@ -29,7 +29,7 @@ Tujuan dari proyek ini adalah:
 - Mengetahui cara membuat model *machine learning* untuk memprediksi apakah terdiagnosis stroke atau tidak
 - Mengetahui perbandingan beberapa algoritma model sehingga ditemukan akurasi yang paling baik
 
-#### Solution Statements
+### Solution Statements
 Untuk mendapatkan model *machine learning* dengan akurasi terbaik, saya akan membuat 2 model berbeda untuk dibandingkan, di antaranya:
 - *Random Forest*, adalah sebuah algoritma dalam model *machine learning* yang bekerja dengan membangun beberapa decision tree dan menggabungkannya demi mendapatkan prediksi yang lebih stabil dan akurat. 
 - *KNN*, adalah sebuah algoritma dalam model *machine learning* yang mengasumsikan bahwa sesuatu yang mirip akan ada dalam jarak yang berdekatan atau bertetangga, sehingga data-data yang cenderung serupa akan dekat satu sama lain. 
